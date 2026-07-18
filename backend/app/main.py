@@ -2,11 +2,14 @@ from fastapi import FastAPI
 from sqlalchemy import text
 
 from app.database import engine
+from app.routers import cars
 
 app = FastAPI(
     title="Car Dealership Inventory API",
     version="1.0.0"
 )
+
+app.include_router(cars.router)
 
 
 @app.get("/")
@@ -17,5 +20,5 @@ def root():
 
     return {
         "message": "Database connected successfully!",
-        "database": database_name
+        "database": "car_dealership"
     }
